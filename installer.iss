@@ -1,7 +1,13 @@
+; Wersja może być przekazana z zewnątrz przez ISCC /DMyAppVersion=x.y.z
+; (GitHub Actions robi to automatycznie z taga git)
+#ifndef MyAppVersion
+  #define MyAppVersion "0.2.0"
+#endif
+
 [Setup]
 AppName=JumpVolt
-AppVersion=0.2.0
-AppVerName=JumpVolt 0.2.0
+AppVersion={#MyAppVersion}
+AppVerName=JumpVolt {#MyAppVersion}
 AppPublisher=JumpVolt
 AppPublisherURL=https://github.com/ByakkoHex/JumpVolt
 AppSupportURL=https://github.com/ByakkoHex/JumpVolt/issues
@@ -12,7 +18,7 @@ DefaultGroupName=JumpVolt
 DisableProgramGroupPage=yes
 
 OutputDir=installer_output
-OutputBaseFilename=JumpVolt_Setup_0.2.0
+OutputBaseFilename=JumpVolt_Setup_{#MyAppVersion}
 SetupIconFile=SklepMotoryzacyjny\Resources\app.ico
 
 Compression=lzma2
@@ -42,7 +48,7 @@ Source: "publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs creat
 
 [Icons]
 ; Menu Start
-Name: "{group}\JumpVolt";           Filename: "{app}\SklepMotoryzacyjny.exe"
+Name: "{group}\JumpVolt";            Filename: "{app}\SklepMotoryzacyjny.exe"
 Name: "{group}\Odinstaluj JumpVolt"; Filename: "{uninstallexe}"
 
 ; Pulpit (opcjonalnie)

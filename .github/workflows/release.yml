@@ -1,5 +1,6 @@
-name: Release
+name: Build & Release
 
+# Uruchamia się gdy wypchniesz tag w formacie: v0.2.0, v1.0.0 itp.
 on:
   push:
     tags:
@@ -12,28 +13,31 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout
+      - name: Checkout kodu
         uses: actions/checkout@v4
 
-      - name: Setup .NET 8
+      - name: Konfiguracja .NET 8
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Pobierz wersję z taga
+      # "v0.2.0" → "0.2.0"
+      - name: Wyciągnij wersję z taga
         id: version
         shell: bash
         run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
 
-      - name: Ustaw wersję w .csproj
+      # Podmienia <Version> w .csproj żeby aplikacja zgłaszała właściwą wersję
+      - name: Zaktualizuj wersję w .csproj
         shell: pwsh
         run: |
           $v = "${{ steps.version.outputs.VERSION }}"
           $f = "SklepMotoryzacyjny/SklepMotoryzacyjny.csproj"
           (Get-Content $f) -replace '<Version>.*?</Version>', "<Version>$v</Version>" |
             Set-Content $f
+          Write-Host "Wersja: $v"
 
-      - name: Publikuj aplikację
+      - name: Opublikuj aplikację (single-file exe)
         shell: pwsh
         run: |
           dotnet publish SklepMotoryzacyjny/SklepMotoryzacyjny.csproj `
@@ -41,13 +45,20 @@ jobs:
             -p:PublishSingleFile=true `
             -o ./publish
 
-      - name: Zmień nazwę pliku
-        shell: bash
-        run: mv ./publish/SklepMotoryzacyjny.exe "./publish/JumpVolt-${{ steps.version.outputs.VERSION }}.exe"
+      - name: Zainstaluj Inno Setup
+        run: choco install innosetup --no-progress -y
 
-      - name: Utwórz GitHub Release
+      # Kompiluje installer.iss i przekazuje wersję jako define
+      - name: Skompiluj installer
+        shell: pwsh
+        run: |
+          $v = "${{ steps.version.outputs.VERSION }}"
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /DMyAppVersion=$v installer.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Utwórz GitHub Release i wgraj installer
         uses: softprops/action-gh-release@v2
         with:
           name: "JumpVolt v${{ steps.version.outputs.VERSION }}"
-          files: "./publish/JumpVolt-${{ steps.version.outputs.VERSION }}.exe"
+          files: "installer_output/JumpVolt_Setup_${{ steps.version.outputs.VERSION }}.exe"
           generate_release_notes: true
