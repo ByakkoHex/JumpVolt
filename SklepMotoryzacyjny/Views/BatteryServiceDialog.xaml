@@ -1,0 +1,151 @@
+<Window x:Class="SklepMotoryzacyjny.Views.BatteryServiceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Usługa do akumulatora"
+        Width="500" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStyle="SingleBorderWindow"
+        ShowInTaskbar="False">
+
+    <Border Style="{StaticResource CardPanel}" Margin="16">
+        <StackPanel>
+
+            <!-- Nagłówek -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="🔋" FontSize="30" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Dodaj usługę do akumulatora" FontSize="17" FontWeight="Bold" Foreground="#1A1A1A"/>
+                    <TextBlock x:Name="BatteryNameText" FontSize="13" Foreground="#616161" TextWrapping="Wrap" MaxWidth="370"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Separator Margin="0,0,0,12" Background="#E0E0E0"/>
+
+            <!-- === MONTAŻ === -->
+            <Border Background="#E8F5E9" CornerRadius="8" Padding="12,10" Margin="0,0,0,8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Tytuł usługi -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="🔧" FontSize="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <StackPanel>
+                            <TextBlock Text="Montaż" FontSize="16" FontWeight="Bold" Foreground="#1B5E20"/>
+                            <TextBlock Text="Montaż akumulatora (zależy od modelu auta)" FontSize="12" Foreground="#388E3C"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Cena + przycisk -->
+                    <DockPanel Grid.Row="1">
+                        <Button DockPanel.Dock="Right" Content="✓  Dodaj montaż"
+                                Click="OnMontaz"
+                                Background="#2E7D32" Foreground="White"
+                                FontSize="14" FontWeight="SemiBold"
+                                Padding="14,8" MinHeight="42" Margin="8,0,0,0" Cursor="Hand"
+                                BorderThickness="0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="7"
+                                            Padding="{TemplateBinding Padding}">
+                                        <TextBlock Text="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}"
+                                                   FontWeight="{TemplateBinding FontWeight}"
+                                                   Foreground="{TemplateBinding Foreground}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bd" Property="Background" Value="#1B5E20"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <StackPanel>
+                            <TextBlock Text="Cena usługi:" FontSize="12" Foreground="#388E3C" Margin="0,0,0,2"/>
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Right" Text=" zł" FontSize="17" FontWeight="Bold"
+                                           Foreground="#2E7D32" VerticalAlignment="Center"/>
+                                <TextBox x:Name="MontazPriceBox" Text="0"
+                                         FontSize="18" FontWeight="Bold" TextAlignment="Right"
+                                         MinHeight="42" Padding="8,6"
+                                         BorderBrush="#A5D6A7" Background="White"
+                                         GotFocus="PriceBox_GotFocus"
+                                         PreviewTextInput="PriceBox_PreviewTextInput"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </Border>
+
+            <!-- === DOWÓZ I MONTAŻ === -->
+            <Border Background="#E3F2FD" CornerRadius="8" Padding="12,10" Margin="0,0,0,12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Tytuł usługi -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="🚚" FontSize="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <StackPanel>
+                            <TextBlock Text="Dowóz i Montaż u klienta" FontSize="16" FontWeight="Bold" Foreground="#0D47A1"/>
+                            <TextBlock Text="Dojazd + montaż pod adres (zależy od odległości i auta)" FontSize="12" Foreground="#1565C0"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Cena + przycisk -->
+                    <DockPanel Grid.Row="1">
+                        <Button DockPanel.Dock="Right" Content="✓  Dodaj dowóz"
+                                Click="OnDowozIMontaz"
+                                Background="#1565C0" Foreground="White"
+                                FontSize="14" FontWeight="SemiBold"
+                                Padding="14,8" MinHeight="42" Margin="8,0,0,0" Cursor="Hand"
+                                BorderThickness="0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="7"
+                                            Padding="{TemplateBinding Padding}">
+                                        <TextBlock Text="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}"
+                                                   FontWeight="{TemplateBinding FontWeight}"
+                                                   Foreground="{TemplateBinding Foreground}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bd" Property="Background" Value="#0D47A1"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <StackPanel>
+                            <TextBlock Text="Cena usługi:" FontSize="12" Foreground="#1565C0" Margin="0,0,0,2"/>
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Right" Text=" zł" FontSize="17" FontWeight="Bold"
+                                           Foreground="#1565C0" VerticalAlignment="Center"/>
+                                <TextBox x:Name="DowozPriceBox" Text="0"
+                                         FontSize="18" FontWeight="Bold" TextAlignment="Right"
+                                         MinHeight="42" Padding="8,6"
+                                         BorderBrush="#90CAF9" Background="White"
+                                         GotFocus="PriceBox_GotFocus"
+                                         PreviewTextInput="PriceBox_PreviewTextInput"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </Border>
+
+            <Separator Margin="0,0,0,10" Background="#E0E0E0"/>
+
+            <!-- Bez usługi -->
+            <Button Content="Nie, tylko akumulator" Click="OnBezUslugi" Style="{StaticResource PrimaryButton}" MinHeight="44" FontSize="14"/>
+
+        </StackPanel>
+    </Border>
+</Window>

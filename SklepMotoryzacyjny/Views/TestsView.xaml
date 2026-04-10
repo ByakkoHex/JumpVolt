@@ -1,0 +1,286 @@
+<UserControl x:Class="SklepMotoryzacyjny.Views.TestsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:SklepMotoryzacyjny.Converters">
+
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVis"/>
+        <Style x:Key="SectionCard" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="20,16"/>
+            <Setter Property="Margin" Value="0,0,0,14"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="6" Opacity="0.08" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#1A1A1A"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+        <Style x:Key="InfoRow" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Margin" Value="0,3"/>
+        </Style>
+        <Style x:Key="InfoLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#616161"/>
+            <Setter Property="Width" Value="150"/>
+        </Style>
+        <Style x:Key="InfoValue" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#212121"/>
+        </Style>
+        <Style x:Key="TestButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Width" Value="220"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="420"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ========== LEWA KOLUMNA: Testy + Informacje ========== -->
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Padding="24,20,14,20">
+            <StackPanel>
+
+                <!-- Nagłówek -->
+                <TextBlock Text="🧪  Testy i diagnostyka" Style="{StaticResource HeaderStyle}" Margin="0,0,0,18"/>
+
+                <!-- ===== INFORMACJE O APLIKACJI ===== -->
+                <Border Style="{StaticResource SectionCard}">
+                    <StackPanel>
+                        <TextBlock Text="ℹ  Informacje o aplikacji" Style="{StaticResource SectionHeader}"/>
+                        <StackPanel Style="{StaticResource InfoRow}">
+                            <TextBlock Text="Wersja:" Style="{StaticResource InfoLabel}"/>
+                            <TextBlock Text="{Binding AppVersion}" Style="{StaticResource InfoValue}"
+                                       Foreground="#1565C0" FontSize="14"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource InfoRow}">
+                            <TextBlock Text="Tryb bazy:" Style="{StaticResource InfoLabel}"/>
+                            <TextBlock Text="{Binding DatabaseMode}" Style="{StaticResource InfoValue}"
+                                       Foreground="#2E7D32"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource InfoRow}">
+                            <TextBlock Text="Baza danych:" Style="{StaticResource InfoLabel}"/>
+                            <TextBlock Text="{Binding DatabasePath}" Style="{StaticResource InfoValue}"
+                                       TextWrapping="Wrap" MaxWidth="320"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource InfoRow}">
+                            <TextBlock Text="Rozmiar bazy:" Style="{StaticResource InfoLabel}"/>
+                            <TextBlock Text="{Binding DatabaseSize}" Style="{StaticResource InfoValue}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource InfoRow}">
+                            <TextBlock Text="System:" Style="{StaticResource InfoLabel}"/>
+                            <TextBlock Text="Windows" Style="{StaticResource InfoValue}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== TESTY KASY FISKALNEJ ===== -->
+                <Border Style="{StaticResource SectionCard}">
+                    <StackPanel>
+                        <TextBlock Text="🖨  Kasa fiskalna" Style="{StaticResource SectionHeader}"/>
+                        <TextBlock Text="Wszystkie testy wymagają aktywnego połączenia z kasą (skonfigurowanego w Ustawieniach)."
+                                   FontSize="12" Foreground="#757575" Margin="0,0,0,14" TextWrapping="Wrap"/>
+                        <WrapPanel>
+                            <Button Content="Test połączenia"
+                                    Style="{StaticResource TestButton}"
+                                    Command="{Binding TestConnectionCommand}"/>
+                            <Button Content="Wydruk testowy (niefiskalny)"
+                                    Style="{StaticResource TestButton}"
+                                    Command="{Binding TestNonFiscalPrintCommand}"/>
+                            <Button Content="Otwórz szufladę"
+                                    Style="{StaticResource TestButton}"
+                                    Margin="0"
+                                    Command="{Binding TestDrawerCommand}"/>
+                        </WrapPanel>
+
+                        <!-- Pasek ładowania -->
+                        <Border Margin="0,12,0,0"
+                                Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="18" Height="18" CornerRadius="9" Background="#FFD600" Margin="0,0,8,0"/>
+                                <TextBlock Text="Trwa test..." FontSize="13" Foreground="#424242" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== AKTUALIZACJE ===== -->
+                <Border Style="{StaticResource SectionCard}">
+                    <StackPanel>
+                        <TextBlock Text="🔄  Aktualizacje aplikacji" Style="{StaticResource SectionHeader}"/>
+                        <TextBlock FontSize="12" Foreground="#757575" Margin="0,0,0,12" TextWrapping="Wrap">
+                            <Run Text="Adres serwera aktualizacji konfiguruje się w: "/>
+                            <Run Text="Ustawienia → Aktualizacje" FontWeight="SemiBold" Foreground="#1A1A1A"/>
+                        </TextBlock>
+
+                        <WrapPanel Margin="0,0,0,12">
+                            <Button Content="Sprawdź aktualizacje"
+                                    Style="{StaticResource TestButton}"
+                                    Command="{Binding CheckUpdatesCommand}"/>
+                            <Button Content="⬇  Pobierz i zainstaluj"
+                                    Style="{StaticResource SuccessButton}"
+                                    Width="200" Height="42" FontSize="13" Margin="0"
+                                    Command="{Binding DownloadUpdateCommand}"
+                                    Visibility="{Binding HasUpdate, Converter={StaticResource BoolToVis}}"/>
+                        </WrapPanel>
+
+                        <!-- Pasek pobierania -->
+                        <StackPanel Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}"
+                                    Margin="0,0,0,10">
+                            <TextBlock Text="{Binding DownloadProgress, StringFormat='Pobieranie: {0}%'}"
+                                       FontSize="13" Foreground="#424242" Margin="0,0,0,4"/>
+                            <ProgressBar Height="10" Maximum="100"
+                                         Value="{Binding DownloadProgress}"
+                                         Background="#E0E0E0" Foreground="#2E7D32"/>
+                        </StackPanel>
+
+                        <!-- Status aktualizacji (widoczny gdy niepusty) -->
+                        <Border Background="#F5F5F5" CornerRadius="6" Padding="12,10">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding UpdateStatus}" Value="">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <TextBlock Text="{Binding UpdateStatus}" FontSize="13"
+                                       Foreground="#424242" TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- ========== PRAWA KOLUMNA: Log wyników ========== -->
+        <Border Grid.Column="1" Background="White" BorderThickness="2,0,0,0" BorderBrush="#E0E0E0">
+            <DockPanel>
+                <!-- Nagłówek logu -->
+                <Border DockPanel.Dock="Top" Background="#1A1A1A" Padding="16,12">
+                    <Grid>
+                        <TextBlock Text="📋  Log testów" FontSize="14" FontWeight="Bold"
+                                   Foreground="#FFD600" VerticalAlignment="Center"/>
+                        <Button Content="Wyczyść" HorizontalAlignment="Right"
+                                Command="{Binding ClearResultsCommand}"
+                                Background="Transparent" BorderBrush="#555" BorderThickness="1"
+                                Foreground="#BDBDBD" FontSize="12" Padding="10,4" Cursor="Hand">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="#555"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Foreground" Value="#BDBDBD"/>
+                                    <Setter Property="FontSize" Value="12"/>
+                                    <Setter Property="Padding" Value="10,4"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4" Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#333"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <!-- Lista wyników -->
+                <ItemsControl ItemsSource="{Binding Results}" Margin="0">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="16,12" BorderThickness="0,0,0,1" BorderBrush="#F0F0F0">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="White"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Status}" Value="OK">
+                                                <Setter Property="Background" Value="#F1F8E9"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Status}" Value="BŁĄD">
+                                                <Setter Property="Background" Value="#FFEBEE"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="28"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Ikona statusu -->
+                                    <TextBlock Grid.Column="0" Text="{Binding Icon}" FontSize="16"
+                                               VerticalAlignment="Top" Margin="0,1,0,0">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="#757575"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="OK">
+                                                        <Setter Property="Foreground" Value="#2E7D32"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="BŁĄD">
+                                                        <Setter Property="Foreground" Value="#C62828"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <!-- Treść -->
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding Name}" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="#212121"/>
+                                        <TextBlock Text="{Binding Message}" FontSize="12"
+                                                   Foreground="#616161" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                    </StackPanel>
+
+                                    <!-- Czas -->
+                                    <TextBlock Grid.Column="2" Text="{Binding TimeDisplay}"
+                                               FontSize="11" Foreground="#9E9E9E"
+                                               VerticalAlignment="Top" Margin="8,2,0,0"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

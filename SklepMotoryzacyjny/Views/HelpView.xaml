@@ -1,0 +1,369 @@
+<UserControl x:Class="SklepMotoryzacyjny.Views.HelpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="8">
+        <StackPanel MaxWidth="900" HorizontalAlignment="Center" Margin="0,8,0,24">
+
+            <!-- ===== NAGŁÓWEK ===== -->
+            <Border Background="#1A1A1A" CornerRadius="12" Padding="28,20" Margin="0,0,0,12">
+                <StackPanel>
+                    <TextBlock Text="📖  INSTRUKCJA OBSŁUGI — JumpVolt"
+                               FontSize="28" FontWeight="Bold" Foreground="#FFD600"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="System sprzedaży i magazynowania dla sklepu motoryzacyjnego"
+                               FontSize="16" Foreground="#BDBDBD"
+                               HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- ===== 1. SPRZEDAŻ ===== -->
+            <Border Background="White" CornerRadius="10" Padding="22,18" Margin="0,0,0,10"
+                    BorderBrush="#E0E0E0" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="🛒  SPRZEDAŻ" FontSize="22" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,12"/>
+
+                    <!-- Krok 1 -->
+                    <Border Background="#FFF9C4" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,4">
+                                <Run Text="1."/>
+                                <Run Text="Dodawanie produktów do koszyka"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Wyszukaj produkt wpisując nazwę, kod kreskowy lub numer katalogowy w polu wyszukiwania."/>
+                                <LineBreak/>
+                                <Run Text="• Możesz też użyć skanera — przyłóż skaner do kodu kreskowego, produkt doda się automatycznie."/>
+                                <LineBreak/>
+                                <Run Text="• Ustaw ilość (pole 'Ilość') i kliknij"/>
+                                <Run Text=" Dodaj do koszyka" FontWeight="Bold"/>
+                                <Run Text=" lub naciśnij Enter."/>
+                                <LineBreak/>
+                                <Run Text="• Podwójne kliknięcie na produkcie z listy też go dodaje."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Krok 2 -->
+                    <Border Background="#E8F5E9" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#2E7D32" Margin="0,0,0,4">
+                                <Run Text="2."/>
+                                <Run Text="Koszyk i edycja ilości"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Koszyk widoczny jest po prawej stronie ekranu."/>
+                                <LineBreak/>
+                                <Run Text="• Aby usunąć pozycję z koszyka — zaznacz ją i kliknij"/>
+                                <Run Text=" Usuń z koszyka" FontWeight="Bold"/>
+                                <Run Text="."/>
+                                <LineBreak/>
+                                <Run Text="• Przycisk"/>
+                                <Run Text=" Wyczyść koszyk" FontWeight="Bold"/>
+                                <Run Text=" usuwa wszystkie pozycje naraz."/>
+                                <LineBreak/>
+                                <Run Text="• Suma do zapłaty aktualizuje się automatycznie na dole."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Krok 3 -->
+                    <Border Background="#E3F2FD" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#1565C0" Margin="0,0,0,4">
+                                <Run Text="3."/>
+                                <Run Text="Płatność i finalizacja"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Wybierz metodę płatności:"/>
+                                <LineBreak/>
+                                <Run Text="    💵  Gotówka"/>
+                                <Run Text=" — wpisz kwotę otrzymaną od klienta, system policzy resztę." FontStyle="Italic"/>
+                                <LineBreak/>
+                                <Run Text="    💳  Karta"/>
+                                <Run Text=" — pojawi się informacja o terminalu; klient płaci kartą." FontStyle="Italic"/>
+                                <LineBreak/>
+                                <Run Text="    🏦  Przelew"/>
+                                <Run Text=" — płatność odroczona / przelewem bankowym." FontStyle="Italic"/>
+                                <LineBreak/>
+                                <Run Text="• Kliknij"/>
+                                <Run Text=" FINALIZUJ SPRZEDAŻ" FontWeight="Bold"/>
+                                <Run Text=" — sprzedaż zostanie zapisana, magazyn zaktualizowany, a paragon wysłany do kasy fiskalnej."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Usługi serwisowe -->
+                    <Border Background="#F3E5F5" CornerRadius="8" Padding="14,10">
+                        <StackPanel>
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#6A1B9A" Margin="0,0,0,4">
+                                <Run Text="4."/>
+                                <Run Text="Usługa serwisowa (wymiana akumulatora)"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Przycisk"/>
+                                <Run Text=" 🔧 Usługa serwisowa" FontWeight="Bold"/>
+                                <Run Text=" otwiera formularz wymiany akumulatora."/>
+                                <LineBreak/>
+                                <Run Text="• Wpisz dane klienta, opis pojazdu, stary i nowy akumulator."/>
+                                <LineBreak/>
+                                <Run Text="• Usługa trafia do koszyka jak zwykły produkt i jest wliczona w rachunek."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- ===== 2. MAGAZYN ===== -->
+            <Border Background="White" CornerRadius="10" Padding="22,18" Margin="0,0,0,10"
+                    BorderBrush="#E0E0E0" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="📦  MAGAZYN" FontSize="22" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,12"/>
+
+                    <Border Background="#FFF9C4" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Dodawanie nowego produktu" FontSize="16" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Kliknij"/>
+                                <Run Text=" ➕ Nowy produkt" FontWeight="Bold"/>
+                                <Run Text=" — otworzy się formularz."/>
+                                <LineBreak/>
+                                <Run Text="• Wybierz kategorię (Akumulator, Olej, Opona itd.) — formularz dostosuje się i pokaże odpowiednie parametry techniczne."/>
+                                <LineBreak/>
+                                <Run Text="• Wypełnij nazwę, markę, ceny, stan magazynowy i parametry techniczne."/>
+                                <LineBreak/>
+                                <Run Text="• Opcjonalnie dodaj zdjęcie produktu (JPG, PNG)."/>
+                                <LineBreak/>
+                                <Run Text="• Kliknij"/>
+                                <Run Text=" 💾 ZAPISZ PRODUKT" FontWeight="Bold"/>
+                                <Run Text="."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#E8F5E9" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Edycja istniejącego produktu" FontSize="16" FontWeight="Bold" Foreground="#2E7D32" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Kliknij dwukrotnie na produkt w tabeli — otworzy się formularz edycji ze wszystkimi danymi."/>
+                                <LineBreak/>
+                                <Run Text="• Możesz też zaznaczyć produkt i kliknąć przycisk"/>
+                                <Run Text=" ✏️ Edytuj" FontWeight="Bold"/>
+                                <Run Text="."/>
+                                <LineBreak/>
+                                <Run Text="• Zmień co potrzebujesz i zapisz."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#E3F2FD" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Przyjęcie towaru (uzupełnianie stanu)" FontSize="16" FontWeight="Bold" Foreground="#1565C0" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Zaznacz produkt i kliknij"/>
+                                <Run Text=" 📥 Przyjmij towar" FontWeight="Bold"/>
+                                <Run Text="."/>
+                                <LineBreak/>
+                                <Run Text="• Wpisz ilość przyjętą na magazyn — stan zaktualizuje się automatycznie."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#FFEBEE" CornerRadius="8" Padding="14,10">
+                        <StackPanel>
+                            <TextBlock Text="Niski stan magazynowy" FontSize="16" FontWeight="Bold" Foreground="#C62828" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Produkty poniżej minimalnego stanu są oznaczone czerwonym kolorem w kolumnie 'Stan'."/>
+                                <LineBreak/>
+                                <Run Text="• Przycisk"/>
+                                <Run Text=" ⚠️ Niski stan" FontWeight="Bold"/>
+                                <Run Text=" filtruje listę i pokazuje tylko produkty wymagające uzupełnienia."/>
+                                <LineBreak/>
+                                <Run Text="• Minimalny stan dla każdego produktu ustawiasz w formularzu edycji (pole 'Minimalny stan')."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- ===== 3. HISTORIA ===== -->
+            <Border Background="White" CornerRadius="10" Padding="22,18" Margin="0,0,0,10"
+                    BorderBrush="#E0E0E0" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="📋  HISTORIA SPRZEDAŻY" FontSize="22" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,12"/>
+
+                    <Border Background="#FFF9C4" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Przeglądanie historii" FontSize="16" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Historia pokazuje wszystkie zrealizowane transakcje z datą, kwotą i metodą płatności."/>
+                                <LineBreak/>
+                                <Run Text="• Użyj filtrów daty 'Od' / 'Do', żeby zawęzić zakres widoku."/>
+                                <LineBreak/>
+                                <Run Text="• Kliknij na sprzedaż, żeby zobaczyć szczegóły — listę kupionych produktów."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#E8F5E9" CornerRadius="8" Padding="14,10">
+                        <StackPanel>
+                            <TextBlock Text="Raporty X i Z kasy fiskalnej" FontSize="16" FontWeight="Bold" Foreground="#2E7D32" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Raport X" FontWeight="Bold"/>
+                                <Run Text=" — raport zerujący dzienny; drukuje podsumowanie sprzedaży bez zerowania pamięci kasy."/>
+                                <LineBreak/>
+                                <Run Text="• Raport Z" FontWeight="Bold"/>
+                                <Run Text=" — raport dobowy; drukuje podsumowanie i ZERUJE liczniki kasy. Wykonuj go na koniec każdego dnia pracy."/>
+                                <LineBreak/>
+                                <Run Text="• ⚠️ Raport Z jest nieodwracalny — upewnij się, że zakończyłeś wszystkie transakcje danego dnia."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- ===== 4. ZWROTY ===== -->
+            <Border Background="White" CornerRadius="10" Padding="22,18" Margin="0,0,0,10"
+                    BorderBrush="#E0E0E0" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="↩  ZWROTY" FontSize="22" FontWeight="Bold" Foreground="#C62828" Margin="0,0,0,12"/>
+
+                    <Border Background="#FFEBEE" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Jak zrobić zwrot?" FontSize="16" FontWeight="Bold" Foreground="#C62828" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="1.  Wyszukaj paragon — wpisz numer paragonu lub datę zakupu w polu wyszukiwania."/>
+                                <LineBreak/>
+                                <Run Text="2.  Zaznacz pozycje, które klient zwraca (możesz zaznaczyć kilka naraz)."/>
+                                <LineBreak/>
+                                <Run Text="3.  Jeśli klient zwraca tylko część zakupionego towaru, wpisz zwracaną ilość w polu 'Ilość zwrotu'."/>
+                                <LineBreak/>
+                                <Run Text="4.  Kliknij"/>
+                                <Run Text=" Zatwierdź zwrot" FontWeight="Bold"/>
+                                <Run Text="."/>
+                                <LineBreak/>
+                                <Run Text="• System automatycznie przywróci zwrócone produkty do magazynu."/>
+                                <LineBreak/>
+                                <Run Text="• Zwrot jest zapisany w historii z datą i opisem."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- ===== 5. USTAWIENIA ===== -->
+            <Border Background="White" CornerRadius="10" Padding="22,18" Margin="0,0,0,10"
+                    BorderBrush="#E0E0E0" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="⚙️  USTAWIENIA" FontSize="22" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,12"/>
+
+                    <Border Background="#FFF9C4" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Dane firmy" FontSize="16" FontWeight="Bold" Foreground="#1A1A1A" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Uzupełnij dane firmy: nazwa, NIP, adres — będą używane na dokumentach i paragonach."/>
+                                <LineBreak/>
+                                <Run Text="• Ustaw domyślną stawkę VAT dla nowych produktów."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#E3F2FD" CornerRadius="8" Padding="14,10" Margin="0,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Kasa fiskalna Novitus" FontSize="16" FontWeight="Bold" Foreground="#1565C0" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Połączenie COM" FontWeight="Bold"/>
+                                <Run Text=" — wybierz port (np. COM3) i prędkość transmisji."/>
+                                <LineBreak/>
+                                <Run Text="• Połączenie TCP/IP" FontWeight="Bold"/>
+                                <Run Text=" — wpisz adres IP kasy i port (domyślnie 4001)."/>
+                                <LineBreak/>
+                                <Run Text="• Kliknij"/>
+                                <Run Text=" Testuj połączenie" FontWeight="Bold"/>
+                                <Run Text=", żeby sprawdzić czy kasa odpowiada."/>
+                                <LineBreak/>
+                                <Run Text="• Auto-połączenie przy starcie" FontWeight="Bold"/>
+                                <Run Text=" — jeśli zaznaczone, program łączy się z kasą automatycznie po uruchomieniu."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#E8F5E9" CornerRadius="8" Padding="14,10">
+                        <StackPanel>
+                            <TextBlock Text="Uruchamianie z systemem Windows" FontSize="16" FontWeight="Bold" Foreground="#2E7D32" Margin="0,0,0,4"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15" Foreground="#424242">
+                                <Run Text="• Zaznacz opcję"/>
+                                <Run Text=" Uruchamiaj z Windows" FontWeight="Bold"/>
+                                <Run Text=", żeby program startował automatycznie po włączeniu komputera — przydatne na stanowisku kasowym."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- ===== SKRÓTY I WSKAZÓWKI ===== -->
+            <Border Background="#1A1A1A" CornerRadius="10" Padding="22,18" Margin="0,0,0,10">
+                <StackPanel>
+                    <TextBlock Text="⚡  SKRÓTY I WSKAZÓWKI" FontSize="22" FontWeight="Bold" Foreground="#FFD600" Margin="0,0,0,12"/>
+
+                    <UniformGrid Columns="2">
+                        <Border Background="#2C2C2C" CornerRadius="8" Padding="14,10" Margin="0,0,6,6">
+                            <StackPanel>
+                                <TextBlock Text="Enter" FontSize="16" FontWeight="Bold" Foreground="#FFD600" Margin="0,0,0,4"/>
+                                <TextBlock Text="Potwierdza akcję w aktywnym polu (np. dodaje produkt do koszyka po wpisaniu kodu)."
+                                           TextWrapping="Wrap" FontSize="14" Foreground="#BDBDBD"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#2C2C2C" CornerRadius="8" Padding="14,10" Margin="6,0,0,6">
+                            <StackPanel>
+                                <TextBlock Text="Skaner kodów" FontSize="16" FontWeight="Bold" Foreground="#FFD600" Margin="0,0,0,4"/>
+                                <TextBlock Text="Skaner działa jak klawiatura — ustaw kursor w polu skanowania i skanuj, produkt doda się sam."
+                                           TextWrapping="Wrap" FontSize="14" Foreground="#BDBDBD"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#2C2C2C" CornerRadius="8" Padding="14,10" Margin="0,0,6,6">
+                            <StackPanel>
+                                <TextBlock Text="Dwuklik = edycja" FontSize="16" FontWeight="Bold" Foreground="#FFD600" Margin="0,0,0,4"/>
+                                <TextBlock Text="W magazynie: dwuklik na produkcie otwiera formularz edycji."
+                                           TextWrapping="Wrap" FontSize="14" Foreground="#BDBDBD"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#2C2C2C" CornerRadius="8" Padding="14,10" Margin="6,0,0,6">
+                            <StackPanel>
+                                <TextBlock Text="Status na dole" FontSize="16" FontWeight="Bold" Foreground="#FFD600" Margin="0,0,0,4"/>
+                                <TextBlock Text="Pasek na dole ekranu zawsze pokazuje ostatnią wykonaną akcję i aktywny moduł."
+                                           TextWrapping="Wrap" FontSize="14" Foreground="#BDBDBD"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#2C2C2C" CornerRadius="8" Padding="14,10" Margin="0,0,6,0">
+                            <StackPanel>
+                                <TextBlock Text="Kasa fiskalna" FontSize="16" FontWeight="Bold" Foreground="#FFD600" Margin="0,0,0,4"/>
+                                <TextBlock Text="Zielony wskaźnik w lewym dolnym rogu = kasa podłączona. Czerwony / szary = brak połączenia."
+                                           TextWrapping="Wrap" FontSize="14" Foreground="#BDBDBD"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#2C2C2C" CornerRadius="8" Padding="14,10" Margin="6,0,0,0">
+                            <StackPanel>
+                                <TextBlock Text="Backup danych" FontSize="16" FontWeight="Bold" Foreground="#FFD600" Margin="0,0,0,4"/>
+                                <TextBlock Text="Baza danych znajduje się w folderze: %LocalAppData%\JumpVolt\jumpvolt.db — warto robić kopie zapasowe."
+                                           TextWrapping="Wrap" FontSize="14" Foreground="#BDBDBD"/>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- ===== STOPKA ===== -->
+            <Border Background="White" CornerRadius="10" Padding="18,14"
+                    BorderBrush="#E0E0E0" BorderThickness="1">
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="#9E9E9E" FontSize="14">
+                    <Run Text="JumpVolt — System Sprzedaży dla Sklepu Motoryzacyjnego"/>
+                    <LineBreak/>
+                    <Run Text="W razie problemów technicznych skontaktuj się z serwisem aplikacji."/>
+                </TextBlock>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

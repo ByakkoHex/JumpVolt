@@ -1,0 +1,6 @@
+-Automatyczne przeliczanie netto na brutto i na odwrót po domyślne wartości vat
+-Fakturowanie z opcją wysłanie fakury na maila w pdf
+-Tworzenie kodów QR konkretnego produktu
+-Poprawa UI
+-Ciemny i jasny motyw
+-Skręcić ojcu szuflade na rjte xd 

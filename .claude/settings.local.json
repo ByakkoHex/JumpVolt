@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build:*)",
+      "Read(//z/Aplikacja dla taty/$LOCALAPPDATA/**)",
+      "Bash(sqlite3 jumpvolt.db \"SELECT Id, Name, Barcode, CategoryType, SalePrice, StockQuantity FROM Products WHERE Barcode IN \\(''2'',''3''\\) ORDER BY Barcode;\")",
+      "Bash(where sqlite3:*)"
+    ]
+  }
+}

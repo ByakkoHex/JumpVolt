@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Pobierz wersję z taga
+        id: version
+        shell: bash
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Ustaw wersję w .csproj
+        shell: pwsh
+        run: |
+          $v = "${{ steps.version.outputs.VERSION }}"
+          $f = "SklepMotoryzacyjny/SklepMotoryzacyjny.csproj"
+          (Get-Content $f) -replace '<Version>.*?</Version>', "<Version>$v</Version>" |
+            Set-Content $f
+
+      - name: Publikuj aplikację
+        shell: pwsh
+        run: |
+          dotnet publish SklepMotoryzacyjny/SklepMotoryzacyjny.csproj `
+            -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true `
+            -o ./publish
+
+      - name: Zmień nazwę pliku
+        shell: bash
+        run: mv ./publish/SklepMotoryzacyjny.exe "./publish/JumpVolt-${{ steps.version.outputs.VERSION }}.exe"
+
+      - name: Utwórz GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "JumpVolt v${{ steps.version.outputs.VERSION }}"
+          files: "./publish/JumpVolt-${{ steps.version.outputs.VERSION }}.exe"
+          generate_release_notes: true
