@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace SklepMotoryzacyjny.Services
 {
@@ -57,12 +58,15 @@ namespace SklepMotoryzacyjny.Services
     /// <summary>
     /// Sprawdza dostępność aktualizacji.
     ///
-    /// Obsługuje dwa formaty URL:
+    /// Obsługuje trzy formaty URL:
     ///
-    /// 1. GitHub Releases API (zalecane):
+    /// 1. Link do repozytorium GitHub (auto-konwersja na API):
+    ///    https://github.com/ByakkoHex/JumpVolt
+    ///
+    /// 2. GitHub Releases API bezpośrednio:
     ///    https://api.github.com/repos/ByakkoHex/JumpVolt/releases/latest
     ///
-    /// 2. Własny serwer JSON:
+    /// 3. Własny serwer JSON:
     ///    {
     ///      "version": "1.1.0",
     ///      "downloadUrl": "https://example.com/JumpVolt-1.1.0.exe",
@@ -87,9 +91,10 @@ namespace SklepMotoryzacyjny.Services
             try
             {
                 LastError = string.Empty;
-                var json = await _httpClient.GetStringAsync(updateUrl);
+                var resolvedUrl = NormalizeUpdateUrl(updateUrl);
+                var json = await _httpClient.GetStringAsync(resolvedUrl);
 
-                if (IsGitHubApiUrl(updateUrl))
+                if (IsGitHubApiUrl(resolvedUrl))
                     return ParseGitHubRelease(json);
 
                 return JsonSerializer.Deserialize<UpdateInfo>(json);
@@ -99,6 +104,17 @@ namespace SklepMotoryzacyjny.Services
                 LastError = ex.Message;
                 return null;
             }
+        }
+
+        // Konwertuje https://github.com/owner/repo → https://api.github.com/repos/owner/repo/releases/latest
+        private static string NormalizeUpdateUrl(string url)
+        {
+            var match = Regex.Match(url.Trim(),
+                @"^https?://github\.com/([^/]+)/([^/?#]+?)(?:\.git)?/?$",
+                RegexOptions.IgnoreCase);
+            if (match.Success)
+                return $"https://api.github.com/repos/{match.Groups[1].Value}/{match.Groups[2].Value}/releases/latest";
+            return url;
         }
 
         private static bool IsGitHubApiUrl(string url) =>

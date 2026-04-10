@@ -71,36 +71,39 @@
                 </StackPanel>
 
                 <!-- ===== NAWIGACJA ===== -->
-                <StackPanel Margin="10,16,10,0">
-                    <TextBlock Text="MENU" FontSize="11" Foreground="#FFD600" Margin="14,0,0,10"
-                               FontWeight="Bold"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="10,16,10,8">
+                        <TextBlock Text="MENU" FontSize="11" Foreground="#FFD600" Margin="14,0,0,10"
+                                   FontWeight="Bold"/>
 
-                    <Button Content="🛒  SPRZEDAŻ"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowSalesCommand}"/>
+                        <Button Content="🛒  SPRZEDAŻ"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowSalesCommand}"/>
 
-                    <Button Content="📦  MAGAZYN"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowProductsCommand}"/>
+                        <Button Content="📦  MAGAZYN"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowProductsCommand}"/>
 
-                    <Button Content="📋  HISTORIA"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowHistoryCommand}"/>
+                        <Button Content="📋  HISTORIA"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowHistoryCommand}"/>
 
-                    <Button Content="↩  ZWROTY"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowReturnsCommand}"/>
+                        <Button Content="↩  ZWROTY"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowReturnsCommand}"/>
 
-                    <Button Content="🧾  FAKTURY"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowInvoicesCommand}"/>
+                        <Button Content="🧾  FAKTURY"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowInvoicesCommand}"/>
 
-                    <Button Content="⚙️  USTAWIENIA"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowSettingsCommand}"/>
+                        <Button Content="⚙️  USTAWIENIA"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowSettingsCommand}"/>
 
-                    <Border Height="1" Background="#333333" Margin="10,10,10,6"/>
+                        <Border Height="1" Background="#333333" Margin="10,10,10,6"/>
 
-                    <Button Content="🧪  TESTY"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowTestsCommand}"/>
+                        <Button Content="🧪  TESTY"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowTestsCommand}"/>
 
-                    <Button Content="📖  INSTRUKCJA"
-                            Style="{StaticResource NavButton}" Command="{Binding ShowHelpCommand}"/>
-                </StackPanel>
+                        <Button Content="📖  INSTRUKCJA"
+                                Style="{StaticResource NavButton}" Command="{Binding ShowHelpCommand}"/>
+                    </StackPanel>
+                </ScrollViewer>
             </DockPanel>
         </Border>
 

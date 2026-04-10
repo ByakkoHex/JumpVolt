@@ -9,7 +9,7 @@
     <ApplicationIcon>Resources\app.ico</ApplicationIcon>
     <AssemblyName>SklepMotoryzacyjny</AssemblyName>
     <RootNamespace>SklepMotoryzacyjny</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>JumpVolt</Authors>
     <Description>JumpVolt - System sprzedażowo-magazynowy dla sklepu motoryzacyjnego</Description>
     <PublishSingleFile>true</PublishSingleFile>
