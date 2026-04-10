@@ -40,7 +40,7 @@ MinVersion=10.0
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 
 [Tasks]
-Name: "desktopicon";    Description: "Utwórz skrót na pulpicie";  GroupDescription: "Dodatkowe skróty:"; Flags: checked
+Name: "desktopicon";    Description: "Utwórz skrót na pulpicie";  GroupDescription: "Dodatkowe skróty:"
 Name: "startupentry";   Description: "Uruchamiaj JumpVolt razem z Windows"; GroupDescription: "Autostart:"; Flags: unchecked
 
 [Files]
